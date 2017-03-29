@@ -17,7 +17,7 @@ function images() {
 }
 
 function libjs() {
-  return gulp.src('./src/javascripts/libs/*.js')
+  return gulp.src('./src/javascripts/libs/**/*.js')
     .pipe(gulp.dest('./dist/javascripts/libs'));
 }
 
@@ -60,10 +60,10 @@ gulp.task('build:start', ['build:html', 'build:images', 'build:libjs', 'build:ja
 
 gulp.task('watch', ['build:start'], () => {
   // move html files
-  watch('./src/*.html', html);
+  watch('./src/**/*.html', html);
 
   // move lib js files
-  watch('./src/javascripts/libs/*.js', libjs);
+  watch('./src/javascripts/libs/**/*.js', libjs);
 
   // compile and move js files
   watch(['./src/javascripts/**/*.js', '!./src/javascripts/libs/*.js'], javascripts);
