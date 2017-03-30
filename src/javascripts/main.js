@@ -1,1 +1,3 @@
-console.log('Hello World!');
+import utils from './utils.js';
+
+console.log(utils);

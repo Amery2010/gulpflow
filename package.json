@@ -29,6 +29,7 @@
     "gulp-cssnano": "^2.1.2",
     "gulp-eslint": "^3.0.1",
     "gulp-imagemin": "^3.1.1",
+    "gulp-px2rem": "^1.0.11",
     "gulp-qiniu": "^0.2.4",
     "gulp-replace": "^0.5.4",
     "gulp-rollup": "^2.11.0",

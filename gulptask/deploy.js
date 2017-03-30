@@ -51,12 +51,12 @@ gulp.task('deploy:css', () => {
 });
 
 gulp.task('deploy:libjs', () => {
-  return gulp.src('./src/javascripts/libs/*.js')
+  return gulp.src('./src/javascripts/libs/**/*.js')
     .pipe(gulp.dest('./dist/javascripts/libs'));
 });
 
 gulp.task('deploy:js', () => {
-  return gulp.src(['./src/javascripts/**/*.js', '!./src/javascripts/libs/*.js'])
+  return gulp.src('./src/javascripts/**/*.js')
     .pipe(rollup({
       entry: './src/javascripts/main.js',
       format: 'iife'
@@ -90,7 +90,7 @@ gulp.task('deploy:cdn', ['deploy:html', 'deploy:css'], () => {
 });
 
 gulp.task('deploy:upload', ['deploy:cdn', 'deploy:images', 'deploy:libjs', 'deploy:js'], () => {
-  return gulp.src(['./dist/**/*', '!./dist/**/*.html'])
+  return gulp.src('./dist/**/*')
     .pipe(qiniu(config.qiniu.config, {
       dir: config.qiniu.dir,
       versioning: false

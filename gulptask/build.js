@@ -4,6 +4,7 @@ const rollup = require('gulp-rollup');
 const babel = require('gulp-babel');
 const autoprefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass');
+const px2rem = require('gulp-px2rem');
 const sourcemaps = require('gulp-sourcemaps');
 
 function html() {
@@ -22,7 +23,7 @@ function libjs() {
 }
 
 function javascripts() {
-  return gulp.src(['./src/javascripts/**/*.js', '!./src/javascripts/libs/*.js'])
+  return gulp.src('./src/javascripts/**/*.js')
     .pipe(sourcemaps.init())
     .pipe(rollup({
       entry: './src/javascripts/main.js',
@@ -42,6 +43,7 @@ function styles() {
     .pipe(autoprefixer({
       browsers: ['last 4 versions', 'Android >= 4.4']
     }))
+    .pipe(px2rem())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/styles'));
 }
