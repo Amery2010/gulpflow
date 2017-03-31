@@ -6,6 +6,7 @@ const uglify = require('gulp-uglify');
 const autoprefixer = require('gulp-autoprefixer');
 const cssnano = require('gulp-cssnano');
 const sass = require('gulp-sass');
+const px2rem = require('gulp-px2rem');
 const imagemin = require('gulp-imagemin');
 const qiniu = require('gulp-qiniu');
 const replace = require('gulp-replace');
@@ -46,6 +47,7 @@ gulp.task('deploy:css', () => {
     .pipe(autoprefixer({
       browsers: ['last 4 versions', 'Android >= 4.4']
     }))
+    .pipe(px2rem())
     .pipe(cssnano())
     .pipe(gulp.dest('./dist/styles'));
 });
@@ -97,9 +99,11 @@ gulp.task('deploy:upload', ['deploy:cdn', 'deploy:images', 'deploy:libjs', 'depl
     }));
 });
 
-gulp.task('deploy:staging', ['deploy:html', 'deploy:css', 'deploy:images', 'deploy:libjs', 'deploy:js']);
+gulp.task('deploy:build', ['deploy:html', 'deploy:css', 'deploy:images', 'deploy:libjs', 'deploy:js']);
 
-gulp.task('deploy:production', () => gulp.start('deploy:upload'));
+gulp.task('deploy:staging', ['deploy:build']);
+
+gulp.task('deploy:production', ['deploy:build'], () => gulp.start('deploy:upload'));
 
 module.exports = {
   staging: function () {
