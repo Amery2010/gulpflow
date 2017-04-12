@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const watch = require('gulp-watch');
+const eslint = require('gulp-eslint');
 const rollup = require('gulp-rollup');
 const babel = require('gulp-babel');
 const autoprefixer = require('gulp-autoprefixer');
@@ -24,6 +25,9 @@ function libjs() {
 
 function javascripts() {
   return gulp.src('./src/javascripts/**/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
     .pipe(sourcemaps.init())
     .pipe(rollup({
       entry: './src/javascripts/main.js',

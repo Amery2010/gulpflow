@@ -59,6 +59,9 @@ gulp.task('deploy:libjs', () => {
 
 gulp.task('deploy:js', () => {
   return gulp.src('./src/javascripts/**/*.js')
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
     .pipe(rollup({
       entry: './src/javascripts/main.js',
       format: 'iife'
@@ -66,9 +69,6 @@ gulp.task('deploy:js', () => {
     .pipe(babel({
       presets: ['es2015', 'stage-2']
     }))
-    .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
     .pipe(uglify())
     .pipe(gulp.dest('./dist/javascripts'));
 });
