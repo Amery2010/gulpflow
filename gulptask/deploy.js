@@ -58,7 +58,7 @@ gulp.task('deploy:libjs', () => {
 });
 
 gulp.task('deploy:js', () => {
-  return gulp.src('./src/javascripts/**/*.js')
+  return gulp.src(['./src/javascripts/**/*.js', '!./src/javascripts/libs/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
