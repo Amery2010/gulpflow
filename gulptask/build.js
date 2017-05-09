@@ -47,7 +47,10 @@ function styles() {
     .pipe(autoprefixer({
       browsers: ['last 4 versions', 'Android >= 4.4']
     }))
-    .pipe(px2rem())
+    .pipe(px2rem({
+      replace: false,
+      rootValue: 75
+    }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/styles'));
 }
