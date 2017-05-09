@@ -10,6 +10,7 @@ const px2rem = require('gulp-px2rem');
 const imagemin = require('gulp-imagemin');
 const qiniu = require('gulp-qiniu');
 const replace = require('gulp-replace');
+const sitemap = require('gulp-sitemap');
 const config = require('../config');
 
 const srcRegs = {
@@ -38,6 +39,10 @@ function replaceLink(target, link) {
 
 gulp.task('deploy:html', () => {
   return gulp.src('./src/**/*.html')
+    .pipe(gulp.dest('./dist'))
+    .pipe(sitemap({
+      siteUrl: `${config.project.url}`
+    }))
     .pipe(gulp.dest('./dist'));
 });
 

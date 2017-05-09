@@ -1,5 +1,6 @@
 const project = {
   name: 'gulpflow',
+  url: '',
   git: 'https://github.com/Amery2010/gulpflow.git'
 };
 const CDNBaseUrl = '';
