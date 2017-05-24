@@ -6,6 +6,15 @@
   <title>Document</title>
   <link rel="stylesheet" href="./styles/main.css">
   <script src="./javascripts/libs/flexible.js"></script>
+  <script src="./javascripts/libs/zepto.m.min.js"></script>
+  <script>
+    ;(function () {
+      var src = './javascripts/libs/eruda.min.js';
+      if (!/debug=true/.test(window.location) && localStorage.getItem('active-eruda') != 'true') return;
+      document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+      document.write('<scr' + 'ipt>eruda.init();</scr' + 'ipt>');
+    })();
+  </script>
 </head>
 <body>
   <p>Hello World!</p>
