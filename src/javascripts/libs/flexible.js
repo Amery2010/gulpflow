@@ -34,13 +34,7 @@
 
     if (!dpr && !scale) {
         var devicePixelRatio = win.devicePixelRatio;
-        if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
-            dpr = 3;
-        } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)){
-            dpr = 2;
-        } else {
-            dpr = 1;
-        }
+        dpr = devicePixelRatio || 1;
         scale = 1 / dpr;
     }
 
