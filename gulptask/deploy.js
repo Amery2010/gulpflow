@@ -82,9 +82,9 @@ gulp.task('deploy:js', () => {
 });
 
 gulp.task('deploy:images', () => {
-  return gulp.src('./src/images/**/*')
+  return gulp.src(['./src/images/**/*', './src/favicon.ico'], { base: './src' })
     .pipe(imagemin())
-    .pipe(gulp.dest('./dist/images'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('deploy:cdn', ['deploy:html', 'deploy:css'], () => {

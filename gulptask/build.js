@@ -14,8 +14,8 @@ function html() {
 }
 
 function images() {
-  return gulp.src('./src/images/**/*')
-    .pipe(gulp.dest('./dist/images'));
+  return gulp.src(['./src/images/**/*', './src/favicon.ico'], { base: './src' })
+    .pipe(gulp.dest('./dist'));
 }
 
 function libjs() {
