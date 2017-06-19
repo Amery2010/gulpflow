@@ -10,6 +10,7 @@ const px2rem = require('gulp-px2rem');
 const imagemin = require('gulp-imagemin');
 const qiniu = require('gulp-qiniu');
 const replace = require('gulp-replace');
+const sourcemaps = require('gulp-sourcemaps');
 const sitemap = require('gulp-sitemap');
 const config = require('../config');
 
@@ -48,15 +49,29 @@ gulp.task('deploy:html', () => {
 
 gulp.task('deploy:css', () => {
   return gulp.src('./src/scss/main.scss')
+    .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
-      browsers: ['last 4 versions', 'Android >= 4.4']
+      browsers: [
+        'ie >= 9',
+        'ie_mob >= 10',
+        'ff >= 30',
+        'chrome >= 34',
+        'safari >= 7',
+        'opera >= 23',
+        'ios >= 7',
+        'android >= 4.4',
+        'bb >= 10'
+      ],
+      cascade: true,
+      remove: true
     }))
     .pipe(px2rem({
       replace: false,
       rootValue: 75
     }))
     .pipe(cssnano())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/styles'));
 });
 
@@ -70,6 +85,7 @@ gulp.task('deploy:js', () => {
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
+    .pipe(sourcemaps.init())
     .pipe(rollup({
       entry: './src/javascripts/main.js',
       format: 'iife'
@@ -78,6 +94,7 @@ gulp.task('deploy:js', () => {
       presets: ['es2015', 'stage-2']
     }))
     .pipe(uglify())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/javascripts'));
 });
 
