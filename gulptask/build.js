@@ -40,9 +40,10 @@ function javascripts() {
 
 function styles() {
   return gulp.src('./src/scss/main.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({style: 'expanded'}).on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: [
+        'last 3 version',
         'ie >= 9',
         'ie_mob >= 10',
         'ff >= 30',
@@ -70,8 +71,8 @@ gulp.task('browser-sync', function () {
       baseDir: './dist'
     },
     port: 3000,
+    notify: false,
     injectChanges: true,
-    notify: false
   });
 });
 

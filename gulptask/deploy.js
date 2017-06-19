@@ -53,6 +53,7 @@ gulp.task('deploy:css', () => {
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: [
+        'last 3 version',
         'ie >= 9',
         'ie_mob >= 10',
         'ff >= 30',
@@ -100,7 +101,10 @@ gulp.task('deploy:js', () => {
 
 gulp.task('deploy:images', () => {
   return gulp.src(['./src/images/**/*', './src/favicon.ico'], { base: './src' })
-    .pipe(imagemin())
+    .pipe(imagemin({
+      progressive: true,
+      optimizationLevel: 5
+    }))
     .pipe(gulp.dest('./dist'));
 });
 
