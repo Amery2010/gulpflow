@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const cache = require('gulp-cached');
 const watch = require('gulp-watch');
 const eslint = require('gulp-eslint');
 const rollup = require('gulp-rollup');
@@ -11,16 +12,19 @@ const reload = browserSync.reload;
 
 function html() {
   return gulp.src('./src/**/*.html')
+    .pipe(cache('html'))
     .pipe(gulp.dest('./dist'));
 }
 
 function images() {
   return gulp.src(['./src/images/**/*', './src/favicon.ico'], { base: './src' })
+    .pipe(cache('images'))
     .pipe(gulp.dest('./dist'));
 }
 
 function libjs() {
   return gulp.src('./src/javascripts/libs/**/*.js')
+    .pipe(cache('libjs'))
     .pipe(gulp.dest('./dist/javascripts/libs'));
 }
 
@@ -32,6 +36,7 @@ function javascripts() {
       entry: './src/javascripts/main.js',
       format: 'iife'
     }))
+    .pipe(cache('javascripts'))
     .pipe(babel({
       presets: ['es2015', 'stage-2']
     }))
@@ -40,7 +45,8 @@ function javascripts() {
 
 function styles() {
   return gulp.src('./src/scss/main.scss')
-    .pipe(sass({style: 'expanded'}).on('error', sass.logError))
+    .pipe(cache('styles'))
+    .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: [
         'last 3 version',
@@ -54,11 +60,10 @@ function styles() {
         'android >= 4.4',
         'bb >= 10'
       ],
-      cascade: true,
-      remove: true
+      cascade: true
     }))
     .pipe(px2rem({
-      replace: false,
+      replace: true,
       rootValue: 75
     }))
     .pipe(gulp.dest('./dist/styles'));

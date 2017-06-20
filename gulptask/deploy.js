@@ -63,9 +63,7 @@ gulp.task('deploy:css', () => {
         'ios >= 7',
         'android >= 4.4',
         'bb >= 10'
-      ],
-      cascade: true,
-      remove: true
+      ]
     }))
     .pipe(px2rem({
       replace: false,
