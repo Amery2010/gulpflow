@@ -69,18 +69,6 @@ function styles() {
     .pipe(gulp.dest('./dist/styles'));
 }
 
-// 静态服务器
-gulp.task('browser-sync', function () {
-  browserSync.init({
-    server: {
-      baseDir: './dist'
-    },
-    port: 3000,
-    notify: false,
-    injectChanges: true,
-  });
-});
-
 gulp.task('build:html', html);
 
 gulp.task('build:images', images);
@@ -93,7 +81,7 @@ gulp.task('build:styles', styles);
 
 gulp.task('build:start', ['build:html', 'build:images', 'build:libjs', 'build:javascripts', 'build:styles']);
 
-gulp.task('watch', ['build:start', 'browser-sync'], () => {
+gulp.task('watch', ['build:start'], () => {
   // move html files
   watch('./src/**/*.html', () => {
     return html().pipe(reload({stream: true}));
@@ -117,6 +105,15 @@ gulp.task('watch', ['build:start', 'browser-sync'], () => {
   // move images
   watch('./src/images/**/*', () => {
     return images().pipe(reload({stream: true}));
+  });
+
+  browserSync.init({
+    server: {
+      baseDir: './dist'
+    },
+    port: 3000,
+    notify: false,
+    injectChanges: true,
   });
 });
 
