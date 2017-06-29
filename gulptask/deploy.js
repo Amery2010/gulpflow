@@ -106,7 +106,7 @@ gulp.task('deploy:images', () => {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('deploy:cdn', ['deploy:html', 'deploy:css'], () => {
+gulp.task('deploy:cdn', () => {
   timestamp = new Date().getTime();
   
   return gulp.src('./dist/**/*.{html,css}')
@@ -118,7 +118,7 @@ gulp.task('deploy:cdn', ['deploy:html', 'deploy:css'], () => {
     .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('deploy:upload', ['deploy:cdn', 'deploy:images', 'deploy:libjs', 'deploy:js'], () => {
+gulp.task('deploy:upload', ['deploy:cdn'], () => {
   return gulp.src('./dist/**/*')
     .pipe(qiniu(config.qiniu.config, {
       dir: config.qiniu.dir,
