@@ -55,14 +55,12 @@ gulp.task('deploy:css', () => {
       browsers: [
         'last 3 version',
         'ie >= 9',
-        'ie_mob >= 10',
         'ff >= 30',
         'chrome >= 34',
         'safari >= 7',
         'opera >= 23',
         'ios >= 7',
-        'android >= 4.4',
-        'bb >= 10'
+        'android >= 4.4'
       ]
     }))
     .pipe(px2rem({
@@ -133,10 +131,6 @@ gulp.task('deploy:staging', ['deploy:build']);
 gulp.task('deploy:production', ['deploy:build'], () => gulp.start('deploy:upload'));
 
 module.exports = {
-  staging: function () {
-    return gulp.start('deploy:staging');
-  },
-  production: function () {
-    return gulp.start('deploy:production');
-  }
+  staging: () => gulp.start('deploy:staging'),
+  production: () => gulp.start('deploy:production'),
 };

@@ -51,14 +51,12 @@ function styles() {
       browsers: [
         'last 3 version',
         'ie >= 9',
-        'ie_mob >= 10',
         'ff >= 30',
         'chrome >= 34',
         'safari >= 7',
         'opera >= 23',
         'ios >= 7',
-        'android >= 4.4',
-        'bb >= 10'
+        'android >= 4.4'
       ],
       cascade: true
     }))
@@ -117,6 +115,4 @@ gulp.task('watch', ['build:start'], () => {
   });
 });
 
-module.exports = function () {
-  return gulp.start('build:start');
-};
+module.exports = () => gulp.start('build:start');
