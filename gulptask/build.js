@@ -9,6 +9,16 @@ const sass = require('gulp-sass');
 const px2rem = require('gulp-px2rem');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
+const browsersList = [
+  'last 3 version',
+  'ie >= 9',
+  'ff >= 30',
+  'chrome >= 34',
+  'safari >= 7',
+  'opera >= 23',
+  'ios >= 7',
+  'android >= 4.4'
+];
 
 function html() {
   return gulp.src('./src/**/*.html')
@@ -38,7 +48,17 @@ function javascripts() {
     }))
     .pipe(cache('javascripts'))
     .pipe(babel({
-      presets: ['es2015', 'stage-2']
+      presets: [
+        'stage-2',
+        ['es2015', {
+          loose: true
+        }],
+        ['env', {
+          targets: {
+            browsers: browsersList
+          }
+        }]
+      ]
     }))
     .pipe(gulp.dest('./dist/javascripts'));
 }
@@ -48,16 +68,7 @@ function styles() {
     .pipe(cache('styles'))
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
-      browsers: [
-        'last 3 version',
-        'ie >= 9',
-        'ff >= 30',
-        'chrome >= 34',
-        'safari >= 7',
-        'opera >= 23',
-        'ios >= 7',
-        'android >= 4.4'
-      ],
+      browsers: browsersList,
       cascade: true
     }))
     .pipe(px2rem({
