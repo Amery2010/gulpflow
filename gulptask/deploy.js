@@ -13,16 +13,6 @@ const replace = require('gulp-replace');
 const sourcemaps = require('gulp-sourcemaps');
 const sitemap = require('gulp-sitemap');
 const config = require('../config');
-const browsersList = [
-  'last 3 version',
-  'ie >= 9',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4'
-];
 
 const srcRegs = {
   jsInHtml: /<\s*script\s+.*src\s*=\s*["|']([^"']+)[^>]*><\s*\/\s*script\s*>/gim,
@@ -62,7 +52,16 @@ gulp.task('deploy:css', () => {
     .pipe(sourcemaps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
-      browsers: browsersList
+      browsers: [
+        'last 3 version',
+        'ie >= 9',
+        'ff >= 30',
+        'chrome >= 34',
+        'safari >= 7',
+        'opera >= 23',
+        'ios >= 7',
+        'android >= 4.4'
+      ]
     }))
     .pipe(px2rem({
       replace: false,
@@ -94,11 +93,6 @@ gulp.task('deploy:js', () => {
         ['es2015', {
           loose: true
         }],
-        ['env', {
-          targets: {
-            browsers: browsersList
-          }
-        }]
       ]
     }))
     .pipe(uglify())
