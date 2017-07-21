@@ -1,3 +1,17 @@
+html {
+  color: #000;
+  background: #fff;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+html * {
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol,
 li, pre, form, fieldset, legend, button, input, textarea, th, td {
   margin: 0;
@@ -11,16 +25,16 @@ body, button, input, select, textarea {
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  tap-highlight-color: rgba(0, 0, 0, 0);
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-size: 100%;
+  font-weight: 500;
 }
 
-address, cite, dfn, em, var {
+address, caption, cite, code, dfn, em, th, var {
   font-style: normal;
+  font-weight: 500;
 }
 
 code, kbd, pre, samp {
@@ -35,20 +49,24 @@ ul, ol {
   list-style: none;
 }
 
-a {
+ins, a, a:hover {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: none;
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
 }
 
 sup {
-  vertical-align: text-top;
+  top: -0.5em;
 }
 
 sub {
-  vertical-align: text-bottom;
+  bottom: -0.25em;
 }
 
 legend {
@@ -72,4 +90,24 @@ button, input, select, textarea {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+caption,
+th {
+  text-align: left;
+}
+
+q:before,
+q:after {
+  content: '';
 }
